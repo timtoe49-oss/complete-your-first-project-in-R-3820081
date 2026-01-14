@@ -47,3 +47,30 @@ data_mod
 #get topcustomers by total number of orders
 sales |> count(CustName, sort = TRUE) |>
   slice_head(n = 10) # the first ten rows
+
+# get customer type by total number of orders
+table(sales$CustomerType)
+prop.table(table(sales$CustomerType))
+
+# Average sales and quantity by customer type
+sales |> group_by(CustomerType) |>
+  summarize(
+    mean_sales = mean(Order.Total, na.rm = TRUE),
+    mean_quantity = mean(Quantity, na.rm = TRUE)
+  )
+
+# Total sales and quantity by customer type
+sales %>% group_by(CustomerType) %>%
+  summarize(
+    total_sales = sum(Order.Total, na.rm = TRUE),
+    total_quantity = sum(Quantity, na.rm = TRUE)
+  )
+
+#get top cutomer states by total number of orders
+sales |> count(CustState, sort = TRUE)
+
+#review product categories sold by customer state
+table(sales$CustState, sales$ProdCategory)
+
+sales_tible <- as_tibble(sales)
+sales_tible
