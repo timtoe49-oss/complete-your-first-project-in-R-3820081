@@ -1,0 +1,19 @@
+Data sets in package ‘ggplot2’:
+
+diamonds           Prices of over 50,000 round cut
+                   diamonds
+economics          US economic time series
+economics_long     US economic time series
+faithfuld          2d density estimate of Old Faithful
+                   data
+luv_colours        'colors()' in Luv space
+midwest            Midwest demographics
+mpg                Fuel economy data from 1999 to 2008
+                   for 38 popular models of cars
+msleep             An updated and expanded version of
+                   the mammals sleep dataset
+presidential       Terms of 12 presidents from
+                   Eisenhower to Trump
+seals              Vector field of seal movements
+txhousing          Housing sales in TX
+
