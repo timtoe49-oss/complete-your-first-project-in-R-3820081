@@ -1,9 +1,9 @@
 getwd()
+library(tidyverse)
 # ?rmarkdown
 # ??rmarkdown
 library(rmarkdown)
 # ??openxlsx
-# install.packages("openxlsx")
 library(openxlsx)
 # LOAD DATA
 sales <- read.xlsx("Red30_Tech_Sales.xlsx", 1, detectDates = TRUE)
@@ -74,3 +74,34 @@ table(sales$CustState, sales$ProdCategory)
 
 sales_tible <- as_tibble(sales)
 sales_tible
+
+#sort data by order total
+sales[order(sales$Order.Total, decreasing = TRUE), ]
+
+#sort data by quantity
+sales_tible[order(sales_tible$Quantity, decreasing = TRUE), ]
+
+#get top employees by total number of orders
+sales |> count(Employee.Name, sort = TRUE) 
+
+#get top employee job positions by total number of orders
+sales |> count(Employee.Job.Title, sort = TRUE)
+
+#total sales and quantity by product category
+sales %>%
+  group_by(ProdCategory) %>%
+  summarise(total_sales = sum(Order.Total, na.rm = TRUE),
+    total_quantity = sum(Quantity, na.rm = TRUE)
+  )
+
+#review product categories sold by sales regions
+table(sales$ProdCategory, sales$Sales.Region)
+
+colnames(sales)
+# total customers added by date added
+sales |> count(DateCustAdded, sort = TRUE)
+
+# when customers were added by the state they reside in
+table(sales$DateCustAdded, sales$CustState)
+
+sales(order(sales$DateCustAdded, decreasing = TRUE))
