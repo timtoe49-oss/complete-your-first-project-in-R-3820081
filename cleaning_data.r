@@ -5,3 +5,10 @@ library(readr)
 heating <- read_csv("heating.csv")
 glimpse(heating)
 head(heating)
+
+# Tidy the data ####
+heating <- heating %>%
+  gather(key="age", value = "homes", -Source)
+heating_tibble <- as_tibble(heating)
+heating_tibble
+
