@@ -22,4 +22,3 @@ un_data_wide %>%
             linetype = "dashed") +
   scale_x_date(date_labels = "%b\n%Y",
                breaks = "month")
-                  
