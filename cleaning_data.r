@@ -1,3 +1,4 @@
+
 library(tidyverse)
 library(readr)
 # LOAD DATA ######
@@ -32,7 +33,7 @@ heating %>%
   mutate(homes = ifelse(homes == "Z", 0, homes)) %>%
   mutate(homes = as.numeric(homes)) %>%
   filter(Source == "Cooking stove") %>%
-  
+
 heating_df <- heating %>%
   mutate(homes = ifelse(homes == ".", 0, homes)) %>%
   mutate(homes = ifelse(homes == "Z", 0, homes)) %>%
@@ -40,10 +41,12 @@ heating_df <- heating %>%
 
 summary(heating_df)
 
+
+
 # MISSING ROWS ####
 # more difficult to detect than missing values
 
-# Load the dat file
+# Load the data file
 land <- read_csv("publiclands.csv")
 view(land)
 summary(land)
@@ -64,21 +67,20 @@ missing_states <- tibble(State = c("Connecticut", "Delaware", "Hawaii", "Iowa",
                          PublicLandAcres = c(0, 0, 0, 0, 0, 0, 0, 0))
 
 land <- rbind(land, missing_states) # row bind the missing states
-view(land)
+View(land)
 
+# LOAD ANOTHER DATA
+employees <- read_csv("employees.csv")
+View(employees)
 
-heating_tibble <- as_tibble(heating)
-heating_tibble
+# Let's do aggregate
+# Suppose we want to know the total payrol of the company
+sum(employees$Salary)
 
-heating_fct <- heating_tibble %>%
-  mutate(age = factor(age),
-         Source = factor(Source),
-         homes = as.integer(homes))
-heating_fct
-levels(heating_fct$age)
-levels(heating_fct$age) <- c("25-29", "30-34", "35-44", "45-54",
-                              "55-64", "65-74", "75+", "25-")
-levels(heating_fct$age)
+mean(employees$Salary)
+max(employees$Salary)
+# due to the missing value we can't calculate aggregate value
 
-heating_tibble %>% 
-  filter(is.na(as.numeric(homes)))
+sum(employees$Salary, na.rm = TRUE)
+mean(employees$Salary, na.rm = TRUE)
+max(employees$Salary, na.rm = TRUE)
